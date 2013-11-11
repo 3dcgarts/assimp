@@ -403,11 +403,18 @@ void ResolveVertexDataArray(std::vector<T>& data_out, const Scope& source,
 
 		unsigned int next = 0;
 		BOOST_FOREACH(int i, uvIndices) {
+#if 0
 			if(static_cast<size_t>(i) >= tempUV.size()) {
 				DOMError("index out of range",&GetRequiredElement(source,indexDataElementName));
 			}
 
 			data_out[next++] = tempUV[i];
+#else
+			if(static_cast<size_t>(i) < tempUV.size()) {
+                data_out[next++] = tempUV[i];
+			}
+
+#endif
 		}
 	}
 	else {
